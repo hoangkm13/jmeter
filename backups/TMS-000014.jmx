@@ -10,17 +10,26 @@
     </TestPlan>
     <hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group">
-        <intProp name="ThreadGroup.num_threads">1</intProp>
-        <intProp name="ThreadGroup.ramp_time">1</intProp>
+        <intProp name="ThreadGroup.num_threads">500</intProp>
+        <intProp name="ThreadGroup.ramp_time">60</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">1</stringProp>
+          <stringProp name="LoopController.loops">300</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
+        <ConstantThroughputTimer guiclass="TestBeanGUI" testclass="ConstantThroughputTimer" testname="Constant Throughput Timer">
+          <intProp name="calcMode">0</intProp>
+          <doubleProp>
+            <name>throughput</name>
+            <value>15000.0</value>
+            <savedValue>0.0</savedValue>
+          </doubleProp>
+        </ConstantThroughputTimer>
+        <hashTree/>
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">username</stringProp>
@@ -28,15 +37,14 @@
             </elementProp>
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">password</stringProp>
-              <stringProp name="Header.value">password</stringProp>
+              <stringProp name="Header.value">12345678</stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Lock List One">
-          <stringProp name="HTTPSampler.domain">10.205.9.251</stringProp>
-          <stringProp name="HTTPSampler.port">30083</stringProp>
-          <stringProp name="HTTPSampler.protocol">https</stringProp>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Lock List One" enabled="true">
+          <stringProp name="HTTPSampler.domain">box-baseapi.tivi360.vn</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.path">/lockList/save</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -64,7 +72,7 @@
     // &quot;mac&quot;:&quot;FC:D5:D9:79:5B:3E&quot;,&#xd;
     &quot;mac&quot;: &quot;FC:D5:D9:A0:A1:B2&quot;,&#xd;
     &quot;manufacturer_name&quot;: &quot;SDMC&quot;,&#xd;
-    &quot;model_name&quot;: &quot;DV9131&quot;,&#xd;
+    &quot;model_name&quot;: &quot;DV9135&quot;,&#xd;
     &quot;manufacturer_id&quot;: 15,&#xd;
     &quot;model_id&quot;: 6,&#xd;
     &quot;tips_background_url&quot;: &quot;test&quot;,&#xd;
@@ -79,7 +87,7 @@
           </elementProp>
         </HTTPSamplerProxy>
         <hashTree/>
-        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree">
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
@@ -116,7 +124,7 @@
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report">
+        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
@@ -189,14 +197,6 @@
           </objProp>
           <stringProp name="filename"></stringProp>
         </ResultCollector>
-        <hashTree/>
-        <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor" enabled="true">
-          <stringProp name="cacheKey">true</stringProp>
-          <stringProp name="filename"></stringProp>
-          <stringProp name="parameters"></stringProp>
-          <stringProp name="script">log.info(&quot;NDJSON:\n&quot; + vars.get(&quot;bulk_data&quot;).substring(0, 2000)) // In 2000 ký tự đầu</stringProp>
-          <stringProp name="scriptLanguage">groovy</stringProp>
-        </JSR223PostProcessor>
         <hashTree/>
       </hashTree>
     </hashTree>
